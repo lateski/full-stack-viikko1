@@ -1,0 +1,27 @@
+kayttaja->selain:
+note left of selain
+  käyttäjä kirjoittaa tekstikenttään "beep"
+  käyttäjä painaa "talleta"
+end note
+
+note left of selain
+  javascript saa callbackin form submitin johdosta
+end note
+
+note left of selain
+  javascript
+  -lisää DOMissa olevaan listaan käyttäjän formin sisällön
+  -tyhjentää tekstikentän
+  -lähettää POST pyynnön palvelimelle
+end note
+
+
+selain->palvelin: async POST fullstack-exampleapp.herokuapp.com/new_note_spa
+note left of palvelin
+  palvelin tallettaa form-datan tietokantaan
+end note
+palvelin->selain: status 201 CREATED, JSON vastaus
+
+note left of selain
+  tulostetaan consoleen JSON vastaus.
+end note

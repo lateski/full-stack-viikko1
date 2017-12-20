@@ -1,0 +1,40 @@
+kayttaja->selain:
+note left of selain
+kayttaja kirjottaa osoiteriville
+fullstack-exampleapp.herokuapp.com/spa
+end note
+selain->palvelin: GET fullstack-exampleapp.herokuapp.com/spa
+note left of palvelin
+  muodostetaan HTML missä olemassaolevien
+  muistiinpanojen lukumäärä päivitettynä
+end note
+palvelin->selain: status 200, sivun HTML-koodi
+
+note left of selain
+  ladataan HTML seassa esiintyvät resurssit
+end note
+
+selain->palvelin: GET fullstack-exampleapp.herokuapp.com/main.css
+palvelin->selain: status 200, main.css
+
+selain->palvelin: GET fullstack-exampleapp.herokuapp.com/spa.js
+palvelin->selain: status 200, spa.js
+
+note left of selain
+  spa.js tekee muutaman jutun
+  -tekee XHR pyynnön data.jsonille
+  -asetta callbackin formin submit eventille
+end note
+
+selain->palvelin: GET fullstack-exampleapp.herokuapp.com/data.json
+palvelin->selain: status 200, data.json
+
+note left of selain
+  javascript populoi DOM:in
+  data.jsonin sisällöllä.
+end note
+
+note left of selain
+ selain näyttää palvelimen palauttaman HTML:n
+ johon on populoitu javascriptillä lista
+end note
