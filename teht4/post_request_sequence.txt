@@ -1,0 +1,66 @@
+kayttaja->selain:
+note left of selain
+Käyttäjä kirjoittaa tekstikenttään viestin "beep"
+end note
+note left of selain
+Käyttäjä painaa painiketta "Tallenna"
+end note
+
+selain->palvelin: POST fullstack-exampleapp.herokuapp.com/new_note
+note right of palvelin
+ palvelin saa form-datana note kentän
+ jossa sisältönä "beep"
+end note
+
+palvelin->palvelin: tallenna tietokantaan tms
+
+palvelin->selain: status 302 (redirect), Location: /notes
+
+note left of selain
+ Vastaanotettiin status 302, joka on
+ redirect sarjan status 3XX, vastauksen perusteella tulee pyytää
+ /notes palvelimelta
+end note
+
+selain->palvelin: GET fullstack-exampleapp.herokuapp.com/notes
+
+palvelin->selain: status 200, sivun HTML-koodi
+note right of selain
+ selain parsii html dokumentin ja
+ lähettää pyynnöt linkitetyille resursseille
+ main.css ja main.js
+end note
+
+note left of selain
+ Tässä välissä näyttää palvelimen palauttaman HTML:n
+ joka on käytännössä tyhjä aihio (vilahtaa)
+end note
+
+
+selain->palvelin: GET fullstack-exampleapp.herokuapp.com/main.css
+palvelin->selain: status 200, main.css
+
+selain->palvelin: GET fullstack-exampleapp.herokuapp.com/main.js
+palvelin->selain: status 200, main.js
+
+note left of selain
+ vastaanotettuaan main.js tiedoston selain
+ suorittaa sen sisältämän koodin jossa pyydetään
+ asynkronisena GET pyyntönä data.json tiedostoa
+end note
+
+selain->palvelin: GET fullstack-exampleapp.herokuapp.com/data.json
+note right of palvelin
+HUOM! tässä kohtaa haetaan tietokannasta
+tai vastaavasta uudet tiedot
+end note1
+palvelin->selain: status 200 data.json
+
+note right of selain
+ javascript callbackia kutsutaan ja se
+ prosessoi vastauksen ja modifioi sen mukaan DOMia
+end note
+
+note left of selain
+ Selain näyttää javascriptin muokkaaman näkymän
+end note
